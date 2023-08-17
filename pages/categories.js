@@ -1,7 +1,5 @@
 import Layout from "@/components/Layout";
-import { Category } from "@/models/Category";
 import axios from "axios";
-import { Result } from "postcss";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
@@ -126,6 +124,7 @@ export default function Categories() {
                             value={parentCategory}>
                         <option value="">No parent category</option>
                         {categories.length > 0 && categories.map(category => (
+                            // eslint-disable-next-line react/jsx-key
                         <option value={category._id}>{category.name}</option>
                         ))}
                     </select>
@@ -138,6 +137,7 @@ export default function Categories() {
                         className="btn-default text-sm mb-2">Add new property
                     </button>
                     {properties.length > 0 && properties.map((property,index) => (
+                        // eslint-disable-next-line react/jsx-key
                         <div className="flex gap-1 mb-2">
                             <input type="text"
                                 className="mb-0" 
@@ -183,6 +183,7 @@ export default function Categories() {
                  </thead>
                  <tbody>
                      {categories.length > 0 && categories.map(category => (
+                         // eslint-disable-next-line react/jsx-key
                          <tr>
                              <td>{category.name}</td>
                              <td>{category?.parent?.name}</td>

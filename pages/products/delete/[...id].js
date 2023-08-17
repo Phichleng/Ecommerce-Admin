@@ -24,6 +24,7 @@ export default function DeleteProductPage() {
     }
     return (
         <Layout>
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
             <h1 className="text-center">Do you want to delete &nbsp;"{productInfo?.title}?"</h1>
             <div className="flex gap-2 justify-center">
                 <button 

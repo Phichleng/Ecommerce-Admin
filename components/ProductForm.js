@@ -111,16 +111,19 @@ export default function ProductForm({
             <select value={category} onChange={ev => setCategory(ev.target.value)}>
                 <option value="">Uncategorized</option>
                 {categories.length > 0 && categories.map(c => (
+                    // eslint-disable-next-line react/jsx-key
                     <option value={c._id}>{c.name}</option>
                 ))}
             </select>
                 {propertiesToFill.length > 0 && propertiesToFill.map(p => (
+                    // eslint-disable-next-line react/jsx-key
                     <div className="">
                         <label>{p.name[0].toUpperCase()+p.name.substring(1)}</label>
                         <div>
                             <select value={productProperties[p.name]} 
                                     onChange={ev => setProductProp(p.name,ev.target.value)}>
                                 {p.values.map(v => (
+                                    // eslint-disable-next-line react/jsx-key
                                     <option value={v}>{v}</option>
                                 ))}
                             </select>
