@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Spinner from "./Spinner";
 import { ReactSortable } from "react-sortablejs";
+import SpinnerLogo from "@/components/SpinnerLogo";
 
 
 export default function ProductForm({
@@ -32,10 +33,13 @@ export default function ProductForm({
     const [goToProducts,setGoToProducts] = useState(false);
     const [isUploading,setIsUploading] = useState(false);
     const [categories,setCategories] = useState([]);
+    const [categoriesLoading,setCategoriesLoading] = useState(false);
     const router = useRouter();
     useEffect(() => {
+        setCategoriesLoading(true);
         axios.get('/api/categories').then(result => {
             setCategories(result.data);
+            setCategoriesLoading(false);
         })
     }, []);
     async function saveProduct(ev) {
@@ -115,6 +119,9 @@ export default function ProductForm({
                     <option value={c._id}>{c.name}</option>
                 ))}
             </select>
+                {categoriesLoading && (
+                    <SpinnerLogo/>
+                )}
                 {propertiesToFill.length > 0 && propertiesToFill.map(p => (
                     // eslint-disable-next-line react/jsx-key
                     <div className="">
