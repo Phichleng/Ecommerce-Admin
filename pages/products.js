@@ -21,6 +21,7 @@ export default function Products() {
                 <thead>
                     <tr>
                     <td>Product Name</td>
+                    <td>Stock</td>
                     <td></td>
                     </tr>
                 </thead>    
@@ -36,6 +37,7 @@ export default function Products() {
                     {products.map(product => (
                         <tr key={product._id}>
                             <td>{product.title}</td>
+                            <td>{product.stock}</td>
                             <td>
                                 <Link className="btn-default" href={'/products/edit/'+product._id}>
                                     <svg xmlns="http://www.w3.org/2000/svg" 

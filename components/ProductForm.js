@@ -22,6 +22,8 @@ export default function ProductForm({
 
     properties:assignedProperties,
 
+    stock:existingStock,
+
 }) {
 
     const [title,setTitle] = useState(existingTitle || '');
@@ -29,6 +31,7 @@ export default function ProductForm({
     const [category,setCategory] = useState(assignedCategory || '');
     const [productProperties,setProductProperties] = useState(assignedProperties || {});
     const [price,setPrice] = useState(existingPrice || '');
+    const [stock,setStock] = useState(existingStock || '');
     const [images,setImages] = useState(existingImages || []);
     const [goToProducts,setGoToProducts] = useState(false);
     const [isUploading,setIsUploading] = useState(false);
@@ -48,6 +51,7 @@ export default function ProductForm({
             title,
             description,
             price,
+            stock,
             images,
             category,
             properties:productProperties,
@@ -182,6 +186,12 @@ export default function ProductForm({
                 placeholder="Price"
                 value={price}
                 onChange={ev => setPrice(ev.target.value)}/>
+            <label>Stock</label>
+            <input
+                type="number"
+                placeholder="Stock"
+                value={stock}
+                onChange={ev => setStock(ev.target.value)}/>
             <button 
                 type="submit" 
                 className="btn-primary">Save</button>
