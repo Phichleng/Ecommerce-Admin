@@ -2,12 +2,16 @@ import Layout from "@/components/Layout";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import SpinnerLogo from "@/components/SpinnerLogo";
 
 export default function Products() {
     const [products,setProducts] = useState([]);
+    const [isLoading,setIsLoading] = useState(false);
     useEffect(() => {
+        setIsLoading(true);
         axios.get('/api/products').then(response => {
             setProducts(response.data);
+            setIsLoading(false);
         });
     }, []);
     return (
@@ -17,13 +21,23 @@ export default function Products() {
                 <thead>
                     <tr>
                     <td>Product Name</td>
+                    <td>Stock</td>
                     <td></td>
                     </tr>
                 </thead>    
                 <tbody>
+                    {isLoading && (
+                        <tr colSpan={2}>
+                            <div className="py-4">
+                                <SpinnerLogo fullWith={true}/>
+                            </div>
+                        </tr>
+                    )}
+
                     {products.map(product => (
                         <tr key={product._id}>
                             <td>{product.title}</td>
+                            <td>{product.stock}</td>
                             <td>
                                 <Link className="btn-default" href={'/products/edit/'+product._id}>
                                     <svg xmlns="http://www.w3.org/2000/svg" 

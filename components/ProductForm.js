@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Spinner from "./Spinner";
 import { ReactSortable } from "react-sortablejs";
+import SpinnerLogo from "@/components/SpinnerLogo";
 
 
 export default function ProductForm({
@@ -21,6 +22,8 @@ export default function ProductForm({
 
     properties:assignedProperties,
 
+    stock:existingStock,
+
 }) {
 
     const [title,setTitle] = useState(existingTitle || '');
@@ -28,14 +31,18 @@ export default function ProductForm({
     const [category,setCategory] = useState(assignedCategory || '');
     const [productProperties,setProductProperties] = useState(assignedProperties || {});
     const [price,setPrice] = useState(existingPrice || '');
+    const [stock,setStock] = useState(existingStock || '');
     const [images,setImages] = useState(existingImages || []);
     const [goToProducts,setGoToProducts] = useState(false);
     const [isUploading,setIsUploading] = useState(false);
     const [categories,setCategories] = useState([]);
+    const [categoriesLoading,setCategoriesLoading] = useState(false);
     const router = useRouter();
     useEffect(() => {
+        setCategoriesLoading(true);
         axios.get('/api/categories').then(result => {
             setCategories(result.data);
+            setCategoriesLoading(false);
         })
     }, []);
     async function saveProduct(ev) {
@@ -44,6 +51,7 @@ export default function ProductForm({
             title,
             description,
             price,
+            stock,
             images,
             category,
             properties:productProperties,
@@ -115,6 +123,9 @@ export default function ProductForm({
                     <option value={c._id}>{c.name}</option>
                 ))}
             </select>
+                {categoriesLoading && (
+                    <SpinnerLogo/>
+                )}
                 {propertiesToFill.length > 0 && propertiesToFill.map(p => (
                     // eslint-disable-next-line react/jsx-key
                     <div className="">
@@ -137,6 +148,7 @@ export default function ProductForm({
                     <ReactSortable list={images} className="flex flex-wrap gap-1" setList={updateImagesOrder}>
                         {!!images?.length && images.map(link => (
                             <div key={link} className="h-24 bg-white p-4 shadow-sm rounded-sm border border-gray-200">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src={link} alt="" className="rounded-lg"/>
                             </div>
                         ))}
@@ -175,6 +187,12 @@ export default function ProductForm({
                 placeholder="Price"
                 value={price}
                 onChange={ev => setPrice(ev.target.value)}/>
+            <label>Stock</label>
+            <input
+                type="number"
+                placeholder="Stock"
+                value={stock}
+                onChange={ev => setStock(ev.target.value)}/>
             <button 
                 type="submit" 
                 className="btn-primary">Save</button>
