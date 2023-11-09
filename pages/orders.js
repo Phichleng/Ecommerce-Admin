@@ -47,7 +47,7 @@ export default function OrdersPage() {
                         <td>
                             {order.name} {order.email}<br />
                             {order.city} {order.postalCode}
-                            {order.country}<br />
+                            {order.province}<br />
                             {order.streetAddress}<br />
                             {order.phoneNumber}
                         </td>
