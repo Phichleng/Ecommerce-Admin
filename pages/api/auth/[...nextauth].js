@@ -50,7 +50,7 @@ import GoogleProvider from "next-auth/providers/google"
 
 
 
-const adminEmails = ['pinklaing11@gmail.com'];
+const adminEmails = ['pinklaing11@gmail.com' || 'sophanny177@gmail.com'];
 
 export const authOptions = {
     // Configure one or more authentication provider
