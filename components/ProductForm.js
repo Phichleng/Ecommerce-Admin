@@ -16,13 +16,13 @@ export default function ProductForm({
     
     price:existingPrice,
 
+    stock:existingStock,
+
     images:existingImages,
 
     category:assignedCategory, 
 
     properties:assignedProperties,
-
-    stock:existingStock,
 
 }) {
 
@@ -148,7 +148,6 @@ export default function ProductForm({
                     <ReactSortable list={images} className="flex flex-wrap gap-1" setList={updateImagesOrder}>
                         {!!images?.length && images.map(link => (
                             <div key={link} className="h-24 bg-white p-4 shadow-sm rounded-sm border border-gray-200">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src={link} alt="" className="rounded-lg"/>
                             </div>
                         ))}
@@ -184,18 +183,19 @@ export default function ProductForm({
             <label>Price</label>
             <input 
                 type="number" 
-                placeholder="Price"
+                placeholder="$ Price "
                 value={price}
                 onChange={ev => setPrice(ev.target.value)}/>
             <label>Stock</label>
-            <input
-                type="number"
+            <input 
+                type="number" 
                 placeholder="Stock"
                 value={stock}
                 onChange={ev => setStock(ev.target.value)}/>
+
             <button 
                 type="submit" 
-                className="btn-primary">Save</button>
+                className="px-10 py-2  bg-indigo-600 rounded-lg text-white mt-3">Save</button>
             </form>
             
     );

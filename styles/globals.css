@@ -42,34 +42,105 @@ label{
 
 
 .btn-primary{
-    @apply bg-primary text-white px-4 py-1 rounded-md shadow-sm;
+    @apply px-10 py-2   bg-indigo-600 rounded-lg text-white;
+}
+
+.btn-default{
+    @apply px-10 py-2  bg-red-300 rounded-lg text-white;
 }
 
 table.basic{
-    @apply w-full bg-white rounded-md;
+    @apply w-full bg-slate-100 rounded-sm;
 }
 
 table.basic thead tr td,
 table.basic thead tr th{
-    @apply text-sm text-gray-600 uppercase border-b border-gray-300 px-4;
+    @apply text-sm font-bold text-gray-600 uppercase border-b border-gray-300 bg-gray-300 px-4;
 }
 
 table.basic tr td{
-    @apply px-4 py-2;
+    @apply px-5 py-5  border-b ;
 }
 
 table.basic a{
-    @apply px-4 rounded-sm inline-flex mx-1 items-center gap-1 text-sm py-1;
+    @apply px-1 rounded-sm inline-flex mx-1 items-center gap-1 text-sm;
 }
 
-.btn-default, .btn-red{
-    @apply px-4 py-1 rounded-md;
-}
 
-.btn-red{
-    @apply bg-red-400 text-red-600 px-4 py-1 rounded-sm shadow-sm;
-}
 
-.btn-default{
-    @apply bg-white text-gray-600 px-4 py-1 rounded-sm border border-gray-300 shadow-sm;
-}
+
+/* DropdownMenu */
+
+.navigation {
+ position: fixed;
+ top: 20px;
+ right: 20px;
+ width: 60px;
+ height: 60px;
+ background: #fff;
+ box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+ display: flex;
+ justify-content: flex-end;
+ transition: height 0.5s, width 0.5s;
+ transition-delay: 0s, 0.75s;
+ overflow: hidden;
+ border-radius: 10px;
+ }
+      
+ .navigation.active {
+ width: 300px;
+ height: 400px;
+ transition: width 0.5s, height 0.5s;
+ transition-delay: 0s, 0.75s;
+ }
+      
+ .navigation .userBx {
+ position: relative;
+ width: 60px;
+ height: 60px;
+ background: #fff;
+ overflow: hidden;
+ display: flex;
+ align-items: center;
+ transition: 0.5s;
+ transition-delay: 0.5s;
+ }
+      
+ .navigation.active .userBx {
+ width: calc(100% - 60px);
+ transition-delay: 0s;
+ }
+      
+ .navigation .userBx .username {
+    white-space: nowrap;
+    padding: 20px;
+    color: #555;
+     font-size: 1.1em;
+     overflow: hidden;
+ }
+
+      
+ .navigation .menuToggle {
+ position: relative;
+ width: 60px;
+ height: 60px;
+     cursor: pointer;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .navigation .menuToggle img {
+    width: 80%;
+    height: 80%;
+ }
+      
+ .menu{
+        
+     position: absolute;
+     width: 100%;
+     height: calc(100% - 60px);
+     margin-top: 60px;
+     padding: 20px;
+     border-top: 1px solid rgba(0, 0, 0, 0.1);
+ }

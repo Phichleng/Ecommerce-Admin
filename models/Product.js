@@ -7,7 +7,7 @@ const ProductSchema = new Schema({
     images: [{type:String}],
     category: {type:mongoose.Types.ObjectId, ref:'Category'},
     properties: {type:Object},
-    stock: {type:Number,default:0},
+    stock: {type: Number, required: true, default:0},
 }, {
     timestamps: true,
 });

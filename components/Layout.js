@@ -2,6 +2,7 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import Nav  from "@/components/Nav";
 import { useState } from "react";
 import Logo from "./Logo";
+import Footer from "./Footer";
 
 export default function Layout({children}) {
   const [showNav,setShowNav] = useState(false);
@@ -10,7 +11,7 @@ export default function Layout({children}) {
     return(
       <div className="bg-bgGray w-screen h-screen flex items-center">
         <div className="text-center w-full">
-          <button onClick={() => signIn('google')} className="bg-white p-2 px-4 rounded-lg">Login with Google</button>
+          <button onClick={() => signIn('google')} className="border-2 border-indigo-500 p-2 px-4 rounded-lg">Login with Google</button>
         </div>
       </div>
     );
@@ -32,6 +33,7 @@ export default function Layout({children}) {
         </button>
         <div className="flex grow justify-center mr-6">
           <Logo />
+          
         </div>
 
       </div>
@@ -41,7 +43,10 @@ export default function Layout({children}) {
             {children}
           </div>
         </div>
+        <Footer/>
     </div>
+
+
     
   )
 }
