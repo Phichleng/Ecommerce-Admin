@@ -1,119 +1,65 @@
-import axios from 'axios';
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React from 'react'
 
-const request = {
-    isLoading: false,
-    data: null,
-    error: null
-}
+export default function login() {
 
-const LoginPage = () => {
-
-    const [state,setState] = useState(request)
-
-    const [body, setBody] = useState({
-        email: "",
-        password: ""
-    });
-
-    const router = useRouter()
-
-    const handleChange = (e) => {
-        setBody(prev => ({...prev, [e.target.name]: e.target.value}));
-    };
-
-    const handleSubmit = async () => {
-        setState(prev => ({...prev, isLoading: true}))
-        axios.post("/api/signin", body).then((res) => {
-            setState(prev => ({...prev,data: res?.data, isLoading: false}))
-            router.push("/");
-        }).catch(err => {
-            setState(prev => ({
-                ...prev,
-                error: err
-            }))
-        })
-    }
   return (
-    <div className="container mx-auto py-8">
-      <form className="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
-        <h1 className="text-center font-bold mb-3">Yutaka Dashboard</h1>
-        <h2 className="text-md mb-6 text-center text-gray-400">Login</h2>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2"  htmlFor="email">
-            Email
-          </label>
-          <input onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-            type="email"
-            id="email"
-            name="email"
-            placeholder="john@example.com"
-          />
+
+<div>
+
+<div class="flex flex-wrap min-h-screen w-full content-center justify-center bg-gray-200 py-10">
+  
+
+<div class="flex shadow-md">
+
+  <div class="flex flex-wrap content-center justify-center rounded-l-md bg-white w-full">
+    <div class="w-72">
+
+      <h1 class="text-xl font-semibold">Welcome back</h1>
+      <small class="text-gray-400">Welcome back! Please enter your details</small>
+
+
+      <form class="mt-4">
+        <div class="mb-3">
+          <label class="mb-2 block text-xs font-semibold">Email</label>
+          <input type="email" placeholder="Enter your email" class="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500" />
         </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-             htmlFor="password"
-          >
-            Password
-          </label>
-          <input onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-            type="password"
-            id="password"
-            name="password"
-            placeholder="********"
-          />
+
+        <div class="mb-3">
+          <label class="mb-2 block text-xs font-semibold">Password</label>
+          <input type="password" placeholder="*****" class="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500" />
         </div>
-        <div className="flex items-center justify-between my-5">
-          <div className="flex items-start">
-            <div className="flex items-center h-5">
-              <input
-                id="remember"
-                aria-describedby="remember"
-                type="checkbox"
-                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                required=""
-              />
-            </div>
-            <div className="ml-3 text-sm">
-              <label  htmlFor="remember" className="text-gray-500 dark:text-gray-300">
-                Remember me
-              </label>
-            </div>
-          </div>
-          <Link
-            href="/forgot-password"
-            className="text-blue-500 text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-          >
-            Forgot password?
-          </Link>
+
+        <div class="mb-3 flex flex-wrap content-center">
+          <input id="remember" type="checkbox" class="mr-1 checked:bg-purple-700" /> <label for="remember" class="mr-auto text-xs font-semibold">Remember for 30 days</label>
+          <a href="#" class="text-xs font-semibold text-purple-700">Forgot password?</a>
         </div>
-        <button onClick={handleSubmit}
-          className="w-full bg-blue-700 text-white text-sm font-bold py-3 px-4 rounded-md hover:bg-blue-700 transition duration-300"
-          type="button"
-          
-        >
-          Login
-        </button>
-        <p className="my-3 text-sm font-light text-gray-500 dark:text-gray-400">
-        Don&apos;t have an account?{" "}
-          <Link
-            href="/register"
-            className="text-blue-500 font-medium text-primary-600 hover:underline dark:text-primary-500"
-          >
-            Register
-          </Link>
-        </p>
+
+        <div class="mb-3">
+          <button class="mb-1.5 block w-full text-center text-white bg-purple-700 hover:bg-purple-900 px-2 py-1.5 rounded-md">Sign in</button>
+          <button class="flex flex-wrap justify-center w-full border border-gray-300 hover:border-gray-500 px-2 py-1.5 rounded-md">
+            <img class="w-5 mr-2" src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"/>
+            Sign in with Google
+          </button>
+        </div>
       </form>
+
+
+      <div class="text-center">
+        <span class="text-xs text-gray-400 font-semibold">Dont have account?</span>
+        <a href="#" class="text-xs font-semibold text-purple-700">Sign up</a>
+      </div>
     </div>
+  </div>
 
 
+  <div class="flex flex-wrap content-center justify-center rounded-r-md w-full">
+    <img class="w-full h-full bg-center bg-no-repeat bg-cover rounded-r-md" src="https://i.imgur.com/9l1A4OS.jpeg"/>
+  </div>
 
+</div>
+</div>
+
+
+</div>
   )
 }
-
-export default LoginPage

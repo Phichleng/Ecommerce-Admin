@@ -1,7 +1,12 @@
 import {mongooseConnect} from "@/lib/mongoose";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/pages/api/auth/[...nextauth]";
 import {Order} from "@/models/Order";
 
-export default async function handler(req, res) {
+export default async function handle(req,res) {
     await mongooseConnect();
-    res.json(await Order.find().sort({createdAt:-1}));
+    const {user} = await getServerSession(req,res,authOptions);
+    res.json(
+        await Order.find({userEmail:user.email})
+    );
 }

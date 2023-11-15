@@ -1,39 +1,31 @@
-import { Product } from "@/models/Product";
-import { mongooseConnect } from "@/lib/mongoose";
-import { isAdminRequest } from "./auth/[...nextauth]";
+import {mongooseConnect} from "@/lib/mongoose";
+import {Product} from "@/models/Product";
 
-
-export default async function handler(req, res) {
-    const {method} = req;
+export default async function handle(req, res){
     await mongooseConnect();
-    await isAdminRequest(req,res);
-
-
-    if (method === 'GET') {
-        if (req.query?.id) {
-            res.json(await Product.findOne({_id:req.query.id}));
-        } else {
-            res.json(await Product.find());
-        }
+    const {categories, sort, phrase, ...filters} = req.query;
+    let [sortField, sortOrder] = (sort || '_id-desc').split('-');
+    const productsQuery = {};
+    if (categories) {
+        productsQuery.category =categories.split(',');
     }
-    if (method === 'POST') {
-        const {title,description,price,stock,images,category,properties} = req.body;
-        const productDoc = await Product.create({
-            title,description,price,stock,images,category,properties,
+    if (phrase) {
+        productsQuery['$or'] = [
+            {title:{$regex:phrase,$options:'i'}},
+            {description:{$regex:phrase,$options:'i'}},
+
+        ];
+    }
+    if(Object.keys(filters).length > 0) {
+        Object.keys(filters).forEach(filterName => {
+            productsQuery['properties.'+filterName] = filters[filterName];
         })
-        res.json(productDoc);
     }
-
-    if (method === 'PUT') {
-        const {title,description,price,stock,images,category,properties,_id} = req.body;
-        await Product.updateOne({_id}, {title,description,price,stock,images,category,properties});
-        res.json(true);
-    }
-
-    if (method === 'DELETE') {
-        if (req.query?.id) {
-            await Product.deleteOne({_id:req.query?.id});
-            res.json(true);
-        }
-    }
+    res.json(await Product.find(
+        productsQuery,
+        null,
+        {
+            sort:{[sortField]:sortOrder === 'asc' ? 1 : -1}
+        })
+    );
 }

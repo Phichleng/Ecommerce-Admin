@@ -6,7 +6,7 @@ const CategorySchema = new Schema({
     images: [{type:String}],
     parent: {type:mongoose.Schema.Types.ObjectId, ref:'Category'},
     properties: [{type:Object}]
-    
+
 });
 
 
