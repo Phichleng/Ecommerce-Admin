@@ -1,17 +1,22 @@
 import {useSession} from "next-auth/react";
+import { MdOutlineNotificationsNone } from 'react-icons/md';
+
 
 export default function HomeHeader() {
     const {data:session} = useSession();
     return (
-        <div className="text-blue-900 flex justify-between">
-            <h2 className="mt-0">
+        <div className="">
+            <div className="justify-start inline-block">
+                <h2 className="mt-3">
                 <div className="flex gap-2 items-center">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={session?.user?.image} alt="" className="w-6 h-6 rounded-md sm:hidden"/>
                     <div>
-                        Hello, <b>{session?.user?.name}</b>
+                        Welcome, <b>{session?.user?.name}</b>
                     </div>
                 </div>
+
+                </h2>
             </h2>
             <div className="hidden sm:block">
                 <div className="bg-gray-300 flex gap-1 text-black rounded-lg overflow-hidden">
